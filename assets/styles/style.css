@@ -1,0 +1,18 @@
+md-card.container {
+  margin : 0 auto;
+  padding: 0px;
+  margin-top : 10px;
+  width: 90%;
+}
+
+.align-center {
+  margin: 0 auto;
+}
+
+.sub-container {
+  padding: 20px;
+}
+
+md-toolbar .header-icon {
+    margin-right: 5px;
+}

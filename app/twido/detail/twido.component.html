@@ -1,0 +1,87 @@
+<div *ngIf="editTwido">
+    <md-card class="container">
+        <md-toolbar color="accent">
+            Description
+        </md-toolbar>
+        <div *ngIf="!isAddMode()" class="sub-container">
+            <h4>{{ editTwido.code }}</h4>
+            <span>{{ editTwido.model.code }}</span>
+        </div>
+        <div *ngIf="isAddMode()" class="sub-container">
+            <form (ngSubmit)="save()" #twidoForm="ngForm" *ngIf="editTwido">
+                <md-input ngControl="code" placeholder="Code"
+                    [(ngModel)]="editTwido.code"
+                    minlength="16" maxLength="16" required #code>
+                    <md-hint align="end">{{code.characterCount}} / 16</md-hint>
+                </md-input>
+                <div>
+                    <label for="modelInput">Modèle </label>
+                    <select id="modelInput" ngControl="model" 
+                        [(ngModel)]="editTwido.model.id"
+                        *ngIf="isAddMode()" required>
+                        <option *ngFor='let model of twidoModels' 
+                            [value]="model.id"> 
+                            {{ model.code }} 
+                        </option>
+                    </select>
+                    <span *ngIf="!isAddMode()">{{ editTwido.model.code }}</span>
+                </div>
+                <md-card-actions align="end">
+                    <a md-raised-button (click)="gotoTwidos()">Annuler</a>
+                    <button md-raised-button type="submit" 
+                        [disabled]="!twidoForm.form.valid">Enregistrer</button>
+                </md-card-actions>
+            </form>
+        </div>
+        <div *ngIf="!isAddMode()">
+            <md-toolbar color="accent">
+                <span><i class="material-icons header-icon">perm_identity</i></span>
+                <span>Propriétaire </span>
+                <span flex></span>
+                <button md-button class="md-icon-button" aria-label="Modifier"
+                    (click)="showUserSearchComponent()">
+                    <i md-icon>mode_edit</i>
+                </button>
+            </md-toolbar>
+            <div *ngIf="!editTwido.owner" class="sub-container">
+                <span>Aucun utilisateur attaché.</span>
+            </div>
+            <div *ngIf="editTwido.owner" class="sub-container">
+                <h4>{{ editTwido.owner.lastName | uppercase }} {{ editTwido.owner.firstName }}</h4>
+                <span>{{ editTwido.owner.login }}</span>
+            </div>
+            <div *ngIf="userSearchComponentVisible">
+                <user-search [createButtonVisible]="false" 
+                    (userSelected)="setTwidoOwner($event)"></user-search>
+            </div>
+        </div>
+        <div *ngIf="!isAddMode()">
+            <form (ngSubmit)="save()" #twidoParamForm="ngForm" *ngIf="editTwido">
+                <md-toolbar color="accent">
+                    <span><i class="material-icons header-icon">settings</i></span>
+                    <span>Paramètres</span>
+                    <span flex></span>
+                    <button md-button class="md-icon-button" aria-label="Modifier"
+                        type="submit" 
+                        [disabled]="!twidoParamForm.form.valid">
+                        <i md-icon>save</i>
+                    </button>
+                </md-toolbar>
+                <div class="sub-container" *ngFor='let parametersByCategory of parametersByCategories | values:"key"'>
+                    <div>
+                        <h4>{{ parametersByCategory.k }}</h4>
+                        <md-grid-list cols="5" rowHeight="70px">
+                            <div *ngFor="let parameter of parametersByCategory">
+                                <md-grid-tile>
+                                    <md-input style="width: 85%" placeholder="{{parameter.definition.label}}" 
+                                        [(ngModel)]="parameter.value" 
+                                        [disabled]="parameter.definition.readOnly"></md-input>
+                                </md-grid-tile>
+                            </div>
+                        </md-grid-list>
+                    </div>    
+                </div>
+            </form>
+        </div>
+    </md-card>
+</div>

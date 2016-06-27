@@ -1,0 +1,11 @@
+.login-card {
+    position:absolute;
+    width: 40%;
+    margin: 0 30%;
+    padding: 0 auto;
+    top:35%;
+}
+
+.Btnconnect {
+    margin: 0 5%;
+}

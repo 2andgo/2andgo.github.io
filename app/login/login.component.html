@@ -1,0 +1,21 @@
+<md-card class="login-card">
+    <md-toolbar color="primary">
+        <i class="material-icons">perm_identity</i>
+        Connection
+    </md-toolbar>
+    <md-card-content>
+        <br />
+        <form (ngSubmit)="onSubmit(loginForm.value)" [ngFormModel]="loginForm">    
+            <md-input id="login" placeholder="Login"
+                 type="text" 
+                 [ngFormControl]="loginForm.controls['login']" 
+                 #username="ngForm"></md-input>
+            
+            <md-input id="password" placeholder="Password" 
+                type="password" 
+                [ngFormControl]="loginForm.controls['password']" 
+                #password="ngForm"></md-input>
+            <button class="Btnconnect" md-raised-button type="submit" [disabled]="!loginForm.valid">Login</button>
+        </form>
+    </md-card-content>
+</md-card>

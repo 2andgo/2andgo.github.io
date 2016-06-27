@@ -1,0 +1,41 @@
+<md-card class="container">
+    <div class="sub-container">
+        <md-input placeholder="Login" [(ngModel)]="login"></md-input>    
+        <md-card-actions align="end">
+            <button md-raised-button color="accent" 
+                *ngIf="createButtonVisible" [routerLink]="['User', {id: 'new'}]">Créer</button>
+            <button md-raised-button color="primary" (click)="search()">Rechercher</button>
+        </md-card-actions>
+    </div>
+</md-card>
+<md-card *ngIf='resultZoneVisible' class="container">
+    <div class="sub-container">
+        <md-data-table>
+            <thead>
+                <tr>
+                    <th>Login</th>
+                    <th>Nom</th>
+                    <th>Type</th>
+                    <th>Dernière connexion</th>
+                    <th>Date de création</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngIf='isEmpty()'>
+                    Aucun utilisateur trouvé.
+                </tr>
+                <tr *ngFor='let user of users'>
+                    <td>{{ user.login }}</td>
+                    <td>{{ user.lastName | uppercase }} {{ user.firstName }}</td>
+                    <td>{{ user.type }}</td>
+                    <td>{{ user.lastConnectionDate | date:"yyyy-MM-dd HH:mm" }}</td>
+                    <td>{{ user.creationDate | date:"yyyy-MM-dd HH:mm" }}</td>
+                    <td>
+                        <button md-raised-button (click)="selectUser(user)">Select</button>
+                    </td>
+                </tr>
+            </tbody>
+        </md-data-table>
+    </div>
+</md-card>

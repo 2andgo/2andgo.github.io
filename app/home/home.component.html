@@ -1,0 +1,27 @@
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+      <span class="mdl-layout-title">MyTwido</span>
+      <div class="mdl-layout-spacer"></div>
+      <button md-button class="md-icon-button" aria-label="Modifier"
+        (click)="signOut()">
+        <i md-icon>power_settings_new</i>
+      </button>
+    </div>
+    <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+      <a *ngFor="let item of menuItems" [routerLink]="item.link" 
+        class="mdl-layout__tab" 
+        [ngClass]="{'is-active': isRouteActive(item)}"
+        href="">{{item.caption}}</a>
+    </div>
+  </header>
+  <main class="mdl-layout__content">
+    <section class="mdl-layout__tab-panel is-active">
+      <div class="page-content">
+        <spinner></spinner>
+        <toast></toast>
+        <router-outlet></router-outlet>
+      </div>
+    </section>
+  </main>
+</div>

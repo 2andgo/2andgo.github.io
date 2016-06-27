@@ -1,0 +1,15 @@
+md-input.ng-invalid.ng-dirty.ng-touched {
+  color: red;
+  
+}
+md-input.ng-invalid.ng-dirty.ng-touched .md-input-underline {
+    border-top: 1px solid red;
+}
+
+input.md-input-element.ng-dirty.ng-valid.ng-touched{
+    color: red;
+}
+
+input.ng-invalid {
+  color: red;
+}

@@ -1,0 +1,38 @@
+<md-card class="container">
+    <div class="sub-container">
+        <md-input placeholder="Code" [(ngModel)]="code"></md-input>    
+        <md-card-actions align="end">
+            <button md-raised-button color="accent" [routerLink]="['Twido', {id: 'new'}]">Créer</button>
+            <button md-raised-button color="primary" (click)="search()">Rechercher</button>
+        </md-card-actions>
+    </div>
+</md-card>
+<md-card *ngIf="showResultsTable" class="container">
+    <div class="sub-container">
+        <md-data-table>
+            <thead>
+                <tr>
+                    <th>Code</th>
+                    <th>Modèle</th>
+                    <th>Propriétaire</th>
+                    <th>Date de création</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngIf='isEmpty()'>
+                    Aucun Twido trouvé.
+                </tr>
+                <tr *ngFor='let twido of twidos'>
+                    <td>{{ twido.code | uppercase }}</td>
+                    <td>{{ twido.model.code }}</td>
+                    <td>{{ twido.owner?.firstName }} {{ twido.owner?.lastName }}</td>
+                    <td>{{ twido.creationDate | date:"yyyy-MM-dd" }}</td>
+                    <td>
+                        <button md-raised-button (click)="goToTwido(twido)">Select</button>
+                    </td>
+                </tr>
+            </tbody>
+        </md-data-table>
+    </div>
+</md-card>

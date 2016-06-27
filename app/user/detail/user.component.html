@@ -1,0 +1,32 @@
+<form (ngSubmit)="save()" #userForm="ngForm" *ngIf="user">
+    <md-card class="container">
+        <md-toolbar color="accent">
+            Description
+        </md-toolbar>
+        <div class="sub-container">
+            <md-input ngControl="login" placeholder="Login"
+                [(ngModel)]="editUser.login" required #login>
+            </md-input>
+            <br />
+            <md-input ngControl="password" placeholder="Mot de passe" 
+                [(ngModel)]="editUser.password" required
+                style="width: 200px"></md-input>
+            <br />
+            <br>
+            <div>
+                <label for="userTypesGroupe">Types : </label>
+                <md-radio-group id="userTypesGroupe" [(ngModel)]="editUser.type">
+                    <md-radio-button value="STANDARD">Standard</md-radio-button>
+                    <md-radio-button value="ADMIN">Administrateur</md-radio-button>
+                    <md-radio-button value="SUPERVISOR">Superviseur</md-radio-button>
+                    <md-radio-button value="SUPPORT">Support</md-radio-button>
+                </md-radio-group>
+            </div>
+            <md-card-actions align="end">
+                <a md-button (click)="gotoUsers()">Annuler</a>
+                <button md-button type="submit"
+                    [disabled]="!userForm.form.valid">Enregistrer</button>
+            </md-card-actions>
+        </div>
+    </md-card>
+</form>
